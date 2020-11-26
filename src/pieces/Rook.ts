@@ -1,6 +1,6 @@
 import { CircleGeometry, Group, Mesh, MeshBasicMaterial, PerspectiveCamera, Raycaster, Vector2 } from 'three';
 import { Board } from '../board/Board';
-import PawnModel from '../models/Pawn.obj';
+import RookModel from '../models/Rook.obj';
 import { UserSide } from '../User/UserSide';
 import { loadSomething } from '../utils/ModelLoader';
 import { scene } from '../utils/scene';
@@ -12,7 +12,7 @@ export interface CircleProps {
     yPosition: number;
     mesh: Mesh;
 }
-export class Pawn extends Piece {
+export class Rook extends Piece {
     isFirstMove: boolean;
     isDead: boolean;
     isSelected: boolean;
@@ -73,7 +73,7 @@ export class Pawn extends Piece {
     }
 
     public async render(xPosition: number, yPosition: number): Promise<void> {
-        const object = await loadSomething(PawnModel);
+        const object = await loadSomething(RookModel);
         this.id = object.uuid;
         this.object = object;
         object.scale.set(0.08, 0.08, 0.08);
@@ -100,7 +100,6 @@ export class Pawn extends Piece {
         if (this.isDead) return [];
         const availableMoves: number[][] = [];
         this.isSelected = true;
-
         // check if piece can go forward
         const possiblePieceForward = board.getPieceByPosition(this.xPosition, this.yPosition + 1);
         if (typeof possiblePieceForward === 'string') {

@@ -11,7 +11,6 @@ import {
 } from 'three';
 import { Pawn } from '../pieces/Pawn';
 import { Piece } from '../pieces/Piece';
-import { User } from '../User/User';
 import { UserSide } from '../User/UserSide';
 import { scene } from '../utils/scene';
 

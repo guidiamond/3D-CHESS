@@ -1,10 +1,12 @@
 import { Group, PerspectiveCamera, Raycaster, Vector2 } from 'three';
 import { Board } from '../board/Board';
 import { Pawn } from '../pieces/Pawn';
+import { Rook } from '../pieces/Rook';
 import { UserSide } from './UserSide';
 
 export class User {
     pawns: Pawn[];
+    rooks: Rook[];
     side: UserSide;
     availableSlots: number[][];
     raycaster: Raycaster;
@@ -12,7 +14,8 @@ export class User {
 
     public constructor(side: UserSide, board: Board, camera: PerspectiveCamera) {
         // x,y,side
-        this.pawns = this.generateBishops(side);
+        this.pawns = this.generateBishops(side, camera);
+        this.rooks = this.generateRooks(side, camera);
         this.mouse = new Vector2();
         this.raycaster = new Raycaster();
         window.addEventListener('click', (event: any) => {
@@ -30,7 +33,6 @@ export class User {
                 }
                 for (let i = 0; i < this.pawns.length; i++) {
                     if (this.pawns[i].id !== foundPawn.id) {
-                        console.log('pim');
                         this.pawns[i].deleteAvailableSlots();
                     }
                 }
@@ -53,10 +55,16 @@ export class User {
         return newObj;
     }
 
-    private generateBishops(side: UserSide): Array<Pawn> {
+    private generateRooks(side: UserSide, camera: PerspectiveCamera): Array<Rook> {
+        const rooks = [];
+        rooks.push(new Rook(0, 0, side, camera));
+        rooks.push(new Rook(7, 0, side, camera));
+        return rooks;
+    }
+    private generateBishops(side: UserSide, camera: PerspectiveCamera): Array<Pawn> {
         const bishops = [];
         for (let i = 0; i < 8; i++) {
-            bishops.push(new Pawn(i, 1, side));
+            bishops.push(new Pawn(i, 1, side, camera));
         }
         return bishops;
     }

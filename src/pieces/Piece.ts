@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { UserSide } from '../User/UserSide';
+import { CircleProps } from './Pawn';
 
 export abstract class Piece {
     id: string;
@@ -9,7 +10,7 @@ export abstract class Piece {
         this.side = side;
     }
 
-    abstract move(): void;
+    abstract move(circle: CircleProps): void;
     abstract die(): void;
     // abstract availableGotoSlots(): number[][];
 }
