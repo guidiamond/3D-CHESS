@@ -26,7 +26,7 @@ module.exports = {
 
     // file resolutions
     resolve: {
-        extensions: ['.ts', '.js', '.html'],
+        extensions: ['.ts', '.js', '.html', '.obj'],
     },
 
     // loaders
@@ -39,6 +39,10 @@ module.exports = {
                         loader: 'html-loader',
                     },
                 ],
+            },
+            {
+                test: /\.obj$/,
+                loader: 'file-loader',
             },
             {
                 test: /\.tsx?/,
